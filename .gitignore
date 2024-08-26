@@ -1,2 +1,3 @@
 .venv/
 genres_network/
+__pycache__/
