@@ -1,0 +1,5 @@
+spotipy==2.24.0
+pandas==2.2.2
+matplotlib==3.9.2
+tqdm==4.66.5
+networkx==3.3

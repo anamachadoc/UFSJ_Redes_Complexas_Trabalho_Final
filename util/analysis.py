@@ -64,41 +64,6 @@ def printInformations(network):
 
     clustering_nodes = [(round(clustering_coefficient[node],4), node) if node in selected_nodes else ('-', node) for node in network.nodes()]
 
-
-def createRankingCentrality(*, df, centrality, network, title, name_network):
-  
-    """
-    Função para rankear os vértices com maiores centralidades na rede
-    """
-
-    if not os.path.exists(f'../data/real/{name_network}/graphics'): os.makedirs(f'../data/real/{name_network}/graphics')
-
-    listSingers = []
-    listValuesCoefficient = []
-
-    data = [(round(centrality[node], 4), node) for node in centrality.keys()]
-    data = sorted(data, reverse = True)[:20]
-
-    df_id_list = df['id'].to_list()
-
-    for valueCoefficient, singer_id in data:
-        index = df_id_list.index(singer_id)
-        singer = df['name'].iloc[index]
-        listSingers.append(str(singer) + f' ({network.degree[singer_id]})')
-        listValuesCoefficient.append(valueCoefficient)
-
-    plt.barh(listSingers, listValuesCoefficient)
-    plt.xlabel('Valor da Centralidade')
-    plt.ylabel('Vértice (grau)')
-    for index, value in enumerate(listValuesCoefficient):
-        plt.text(value, index, str(f'{value:.4f}'), ha = 'right', va = 'center')
-        plt.title(title)
-
-    plt.savefig(f'../data/real/{name_network}/graphics/ranking_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
-    plt.show()
-
-    plt.close()
-
 def degreeDistribution(network):
     frequencies_of_degrees = nx.degree_histogram(network)
     probability_of_degrees = [degree/(nx.number_of_nodes(network)) for degree in frequencies_of_degrees]
@@ -109,8 +74,11 @@ def degreeDistribution(network):
 def calculateCentralities(network):
     degree_centrality = nx.degree_centrality(network)
     eigenvector_centrality = nx.eigenvector_centrality(network, max_iter=1000)
+    closeness = nx.closeness_centrality(network, wf_improved = True)
+    betweenness = nx.betweenness_centrality(network)
 
-    return degree_centrality, eigenvector_centrality
+
+    return degree_centrality, eigenvector_centrality, closeness, betweenness
 
 
     
