@@ -23,7 +23,7 @@ class PopularityRecommender:
             return print(f'{artist.id} is not in the graph')
         if not artist.genres:
             return f"Artist '{artist}' is not associated with any genre."
-        
+        print(artist.genres)
         num_genres = len(artist.genres)
         
         recommendations_per_genre = self.number_recommendations // num_genres
@@ -51,7 +51,7 @@ class PopularityRecommender:
                 
                 for a in artists_genre:
                     if not (any(t[0] == a for t in self.artists_recommendations)) and a != artist:
-                        t = (a, self.graph[a][genre]['weight'])
+                        t = (a, self.graph.get_weight_edge(genre, a))
                         artists.append(t)
                             
             artists = list(set(artists))
@@ -59,7 +59,7 @@ class PopularityRecommender:
                 insufficient_artists = True
                 
             artists.sort(key=lambda x: x[1])
-            self.artists_recommendations.extend(artists[:(x - len(self.artists_recommendations))])
+            self.artists_recommendations.extend(artists[:(self.number_recommendations - len(self.artists_recommendations))])
             self.artists_recommendations = list(set(self.artists_recommendations))
             
             if  insufficient_artists:
