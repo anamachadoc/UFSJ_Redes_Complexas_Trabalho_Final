@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import os
+import Graphs.Graph 
 
 class Graphics:
     @classmethod
-    def createGraphic(*, data, xLabel, yLabel, title, limit, lines, name_network):
+    def create_graphic_degrees(cls, *, data, xLabel, yLabel, title, limit, lines, name_network):
 
         if not os.path.exists(f'graphics/{name_network}'): os.makedirs(f'graphics/{name_network}')
 
@@ -31,7 +32,7 @@ class Graphics:
         plt.close()
 
     @classmethod
-    def createGraphicCentrality(*, data, title, name_network):
+    def create_graphic_centrality(cls, *, data, title, name_network):
 
         if not os.path.exists(f'graphics/{name_network}'): os.makedirs(f'graphics/{name_network}')
 
@@ -57,25 +58,22 @@ class Graphics:
         return analysis_centrality
 
     @classmethod
-    def createRankingCentrality(*, df, centrality, network, title, name_network):
+    def create_ranking_centrality(cls, *, centrality, graph, title, name_network):
 
         if not os.path.exists(f'graphics/{name_network}'): os.makedirs(f'graphics/{name_network}')
 
-        listSingers = []
+        listArtists = []
         listValuesCoefficient = []
 
         data = [(round(centrality[node], 4), node) for node in centrality.keys()]
         data = sorted(data, reverse = True)[:20]
 
-        df_id_list = df['id'].to_list()
-
-        for valueCoefficient, singer_id in data:
-            index = df_id_list.index(singer_id)
-            singer = df['name'].iloc[index]
-            listSingers.append(str(singer) + f' ({network.degree[singer_id]})')
+        for valueCoefficient, artist_id in data:
+            artist_name = graph.graph.nodes[artist_id]['name']
+            listArtists.append(str(artist_name) + f' ({graph.get_degree(artist_id)})')
             listValuesCoefficient.append(valueCoefficient)
 
-        plt.barh(listSingers, listValuesCoefficient)
+        plt.barh(listArtists, listValuesCoefficient)
         plt.xlabel('Valor da Centralidade')
         plt.ylabel('Vértice (grau)')
         for index, value in enumerate(listValuesCoefficient):

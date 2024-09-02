@@ -45,7 +45,10 @@ class Graph(ABC):
     def get_average_degree(self):
         return sum(dict(self.get_degree()).values())/self.get_number_of_nodes()
     
-    def get_average_distance(self): # based on the calculation done by Gephi
+    def get_density(self):
+        return nx.density(self.graph)
+    
+    def average_shortest_path_length(self): # based on the calculation done by Gephi
         
         total_sum = 0
         total_pairs = 0
