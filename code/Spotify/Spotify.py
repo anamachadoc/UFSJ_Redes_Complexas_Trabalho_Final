@@ -3,8 +3,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 class Spotify:
 
-    __client_id = 'ba71b05301d542b6b4db56213a2e46f8'
-    __client_secret='78be99b4d3df47b590a70fd47f81e1ab'
+    __client_id = 'bf5aacb1d35a484cbd7a31afc2b2a821'
+    __client_secret='dca1eb5cca1643c1bf4087a6133a166b'
     __sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=__client_id, 
                                                                         client_secret=__client_secret))
     @classmethod

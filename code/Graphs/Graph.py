@@ -104,16 +104,8 @@ class Graph(ABC):
     def get_weight_edge(self, node_1, node_2):
         return self.graph[node_1][node_2]['weight']
 
-    def get_communities(self):
-        louvain_communities = nx.community.louvain_communities(self.graph, weight=None, seed=42)
-
-        for index, community in enumerate(louvain_communities):
-            print(f'Comunidade {index+1:2}:', end=' ')
-            community_list = []
-            for artist_id in community:
-                community_list.append(self.get_artist_name(artist_id))
-            print(community_list)
-        return community_list
+    def get_louvain_communities(self, weight=None):
+        return nx.community.louvain_communities(self.graph, weight=weight, seed=42)
         
     def get_degree_distribution(self):
         frequencies_of_degrees = nx.degree_histogram(self.graph)
