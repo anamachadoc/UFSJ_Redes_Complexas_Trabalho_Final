@@ -3,8 +3,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 class Spotify:
 
-    __client_id = 'b0b78996777e4575871aaf12b2cad2bf'
-    __client_secret='711a1547d4084d61b6e11e672c4e6a4d'
+    __client_id = 'bf5aacb1d35a484cbd7a31afc2b2a821'
+    __client_secret='dca1eb5cca1643c1bf4087a6133a166b'
     __sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=__client_id, 
                                                                         client_secret=__client_secret))
     @classmethod
@@ -32,8 +32,9 @@ class Spotify:
         
         albums = self.__sp.artist_albums(artist_id, album_type='album')['items']
         
+        collaborations = set()
+
         for album in albums:
-            collaborations = set()
             for album in albums:
                 tracks = self.__sp.album_tracks(album['id'])['items']
                 for track in tracks:

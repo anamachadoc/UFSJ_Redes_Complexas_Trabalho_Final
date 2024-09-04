@@ -1,4 +1,6 @@
+import networkx as nx
 from Graph import Graph
+from SimpleGraph import SimpleGraph
 
 class BipartiteGraph(Graph):
     def __init__(self):
@@ -11,3 +13,10 @@ class BipartiteGraph(Graph):
     def add_edges(self, edges):
         for artist, genre, popularity in edges:
             self.graph.add_edge(artist, genre, weight=popularity)
+
+    def transform_bipartite_into_simple(self, nodes : list):
+        graph = nx.bipartite.projected_graph(self.graph, nodes)
+        simpleGraph = SimpleGraph()
+        simpleGraph.add_nodes(list(graph.nodes(data=True)))
+        simpleGraph.add_edges(list(graph.edges(data=True)))
+        return simpleGraph

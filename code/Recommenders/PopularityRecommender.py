@@ -10,7 +10,7 @@ class PopularityRecommender(Recommender):
         return artist
     
     def make_recommendations(self, artist_id):
-        self.artists_recommendations = []
+        self.recommended_artists = []
         artist = self.create_artist(artist_id)
         
         if not self.graph.node_in_graph(artist.id): 
@@ -32,33 +32,33 @@ class PopularityRecommender(Recommender):
             recommendations[genre] = sorted_artists[:recommendations_per_genre]
 
         for genre, artists in recommendations.items():
-            self.artists_recommendations.extend(artists)
+            self.recommended_artists.extend(artists)
         
-        self.artists_recommendations = list(set((self.artists_recommendations)))
+        self.recommended_artists = list(set((self.recommended_artists)))
         
-        while len(self.artists_recommendations) != self.number_recommendations:
+        while len(self.recommended_artists) != self.number_recommendations:
             insufficient_artists = False
             artists = []
             for genre in artist.genres:
                 artists_genre = self.graph.get_neighbors(genre)
                 
                 for a in artists_genre:
-                    if not (any(t[0] == a for t in self.artists_recommendations)) and a != artist:
+                    if not (any(t[0] == a for t in self.recommended_artists)) and a != artist:
                         t = (a, self.graph.get_weight_edge(genre, a))
                         artists.append(t)
                             
             artists = list(set(artists))
-            if len(artists) < self.number_recommendations - len(self.artists_recommendations):
+            if len(artists) < self.number_recommendations - len(self.recommended_artists):
                 insufficient_artists = True
                 
             artists.sort(key=lambda x: x[1])
-            self.artists_recommendations.extend(artists[:(self.number_recommendations - len(self.artists_recommendations))])
-            self.artists_recommendations = list(set(self.artists_recommendations))
+            self.recommended_artists.extend(artists[:(self.number_recommendations - len(self.recommended_artists))])
+            self.recommended_artists = list(set(self.recommended_artists))
             
-            if  insufficient_artists:
-                print(f'There are no {self.number_recommendations} artists to be returned')
+            if insufficient_artists:
+                #print(f'There are no {self.number_recommendations} artists to be returned')
                 break
-        self.artists_recommendations.sort(key=lambda x: x[1], reverse=True)
-        self.artists_recommendations = [artist_id for artist_id, _ in self.artists_recommendations]
+        self.recommended_artists.sort(key=lambda x: x[1], reverse=True)
+        self.recommended_artists = [artist_id for artist_id, _ in self.recommended_artists]
 
-        return self.artists_recommendations
+        return self.recommended_artists

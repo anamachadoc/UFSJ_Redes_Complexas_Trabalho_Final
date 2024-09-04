@@ -116,8 +116,8 @@ class Graph(ABC):
     def get_degree_centrality(self):
         return nx.degree_centrality(self.graph)
     
-    def get_eigenvector_centrality(self, max_iter : int = 1000):
-        return nx.eigenvector_centrality(self.graph, max_iter=max_iter)
+    def get_eigenvector_centrality(self, max_iter : int = 1000, weight : str | None = None):
+        return nx.eigenvector_centrality(self.graph, max_iter=max_iter, weight=weight)
     
     def get_closeness_centrality(self, wf_improved : bool = True):
         return nx.closeness(self.graph, wf_improved = wf_improved)

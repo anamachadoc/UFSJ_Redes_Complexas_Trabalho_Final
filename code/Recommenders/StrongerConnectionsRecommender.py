@@ -6,7 +6,7 @@ class StrongerConnectionsRecommender(Recommender):
         super().__init__(G, number_recommendations)
         
     def make_recommendations(self, artist_id, collaborations : bool = False):
-        self.artists_recommendations = []
+        self.recommended_artists = []
         
         if not self.graph.node_in_graph(artist_id): 
             return print(f'{artist_id} is not in the graph')
@@ -29,6 +29,6 @@ class StrongerConnectionsRecommender(Recommender):
 
         for counter, artist_id_neighbor in enumerate(connections_sorted):
             if counter == self.number_recommendations: break
-            self.artists_recommendations.append(artist_id_neighbor)
+            self.recommended_artists.append(artist_id_neighbor)
         
-        return self.artists_recommendations
+        return self.recommended_artists
