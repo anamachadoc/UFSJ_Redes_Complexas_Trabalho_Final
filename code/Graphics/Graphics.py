@@ -6,7 +6,7 @@ class Graphics:
     @classmethod
     def create_graphic_degrees(cls, *, data, xLabel, yLabel, title, limit, lines, name_network):
 
-        if not os.path.exists(f'graphics/{name_network}'): os.makedirs(f'graphics/{name_network}')
+        if not os.path.exists(f'../graphics/{name_network}'): os.makedirs(f'../graphics/{name_network}')
 
         fig, axs = plt.subplots(nrows = 1, ncols = 2, figsize=(12, 4))
         
@@ -33,8 +33,7 @@ class Graphics:
         plt.yticks(fontsize=16)
         plt.tight_layout()
 
-        fig.savefig('fig.png', dpi=300, bbox_inches='tight')
-        plt.savefig(f'graphics/{name_network}/{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
+        plt.savefig(f'../graphics/{name_network}/{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
         plt.show()
 
         plt.close()
@@ -42,7 +41,7 @@ class Graphics:
     @classmethod
     def create_graphic_centrality(cls, *, data, title, name_network):
 
-        if not os.path.exists(f'graphics/{name_network}'): os.makedirs(f'graphics/{name_network}')
+        if not os.path.exists(f'../graphics/{name_network}'): os.makedirs(f'../graphics/{name_network}')
 
         analysis_centrality = {'value': [], 'frequency': []}
         values = list(data.values())
@@ -58,7 +57,7 @@ class Graphics:
         plt.title(title)
         plt.tight_layout()
 
-        plt.savefig(f'graphics/{name_network}/valores_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
+        plt.savefig(f'../graphics/{name_network}/valores_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
         plt.show()
 
         plt.close()
@@ -68,7 +67,7 @@ class Graphics:
     @classmethod
     def create_ranking_centrality(cls, *, centrality, graph, title, name_network, label = 'degree'):
 
-        if not os.path.exists(f'graphics/{name_network}'): os.makedirs(f'graphics/{name_network}')
+        if not os.path.exists(f'../graphics/{name_network}'): os.makedirs(f'../graphics/{name_network}')
 
         listArtists = []
         listValuesCoefficient = []
@@ -99,7 +98,7 @@ class Graphics:
         plt.yticks(fontsize=16)
         plt.tight_layout()
 
-        #plt.savefig(f'graphics/{name_network}/ranking_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
+        #plt.savefig(f'../graphics/{name_network}/ranking_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
         fig.savefig('fig.png', dpi=300, bbox_inches='tight')
         
         plt.show()

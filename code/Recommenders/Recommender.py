@@ -2,9 +2,8 @@ from abc import ABC, abstractmethod
 from Graphs import Graph
 
 class Recommender(ABC):
-    def __init__(self, G : Graph, number_recommendations : int):
+    def __init__(self, G : Graph):
         self.graph = G
-        self.number_recommendations = number_recommendations
         self.artists_recommendations = None
 
     def convert_recommendations(self, artist_id, artists_ids):

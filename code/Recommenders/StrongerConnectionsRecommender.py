@@ -2,10 +2,10 @@ from Spotify import Spotify as sp
 from Recommender import Recommender
 
 class StrongerConnectionsRecommender(Recommender):
-    def __init__(self, G, number_recommendations):
-        super().__init__(G, number_recommendations)
+    def __init__(self, G):
+        super().__init__(G)
         
-    def make_recommendations(self, artist_id, collaborations : bool = False):
+    def make_recommendations(self, artist_id, number_recommendations, collaborations : bool = False):
         self.recommended_artists = []
         
         if not self.graph.node_in_graph(artist_id): 
@@ -28,7 +28,7 @@ class StrongerConnectionsRecommender(Recommender):
         connections_sorted = dict(sorted(connections.items(), key=lambda item: (item[1][0], item[1][1]), reverse=True))
 
         for counter, artist_id_neighbor in enumerate(connections_sorted):
-            if counter == self.number_recommendations: break
+            if counter == number_recommendations: break
             self.recommended_artists.append(artist_id_neighbor)
         
         return self.recommended_artists

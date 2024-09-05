@@ -1,5 +1,3 @@
-from Graphs import Graph 
-
 class Artist:
     def __init__(self, G, id):
         self.id = id
