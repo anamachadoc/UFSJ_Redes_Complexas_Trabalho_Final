@@ -70,7 +70,7 @@ class Graph(ABC):
     def get_nodes(self):
         return self.graph.nodes()
         
-    def get_average_clustering_coefficient(self):
+    def get_average_clustering_coefficient(self, weight=None):
         
         selected_nodes = []
         
@@ -78,12 +78,12 @@ class Graph(ABC):
             if self.get_degree(node) > 1:
                 selected_nodes.append(node)
         
-        average_clustering_coefficient = nx.average_clustering(self.graph, nodes = selected_nodes, count_zeros = True, weight='weight')
+        average_clustering_coefficient = nx.average_clustering(self.graph, nodes = selected_nodes, count_zeros = True, weight=None)
         percentage_of_considered_nodes = len(selected_nodes)/self.get_number_of_nodes()
 
         return average_clustering_coefficient, percentage_of_considered_nodes
 
-    def get_node_clustering_coefficient(self, node):
+    def get_node_clustering_coefficient(self, node, weight=None):
         
         selected_nodes = []
         
@@ -94,7 +94,7 @@ class Graph(ABC):
         if node not in selected_nodes:
             return 0
         else:
-            clustering_coefficient = nx.clustering(self.graph, nodes = selected_nodes, weight='weight')
+            clustering_coefficient = nx.clustering(self.graph, nodes = selected_nodes, weight=weight)
             return clustering_coefficient[node]
         
     def get_neighbors(self, node):
