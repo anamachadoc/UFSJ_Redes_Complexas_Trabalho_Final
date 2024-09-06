@@ -78,7 +78,7 @@ class Graph(ABC):
             if self.get_degree(node) > 1:
                 selected_nodes.append(node)
         
-        average_clustering_coefficient = nx.average_clustering(self.graph, nodes = selected_nodes, count_zeros = True, weight=None)
+        average_clustering_coefficient = nx.average_clustering(self.graph, nodes = selected_nodes, count_zeros = True, weight=weight)
         percentage_of_considered_nodes = len(selected_nodes)/self.get_number_of_nodes()
 
         return average_clustering_coefficient, percentage_of_considered_nodes
