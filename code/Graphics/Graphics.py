@@ -15,22 +15,21 @@ class Graphics:
         axs[1].set_facecolor('#E6E6E6')
 
         axs[0].scatter(range(1,len(data)+1, 1), data, s = 3, marker = '.', color='black')
-        axs[0].set_xlabel(xLabel, fontsize=16)
-        axs[0].set_ylabel(yLabel, fontsize=16)
-        axs[0].set_title(title, fontsize=16)
+        axs[0].set_xlabel(xLabel, fontsize=12)
+        axs[0].set_ylabel(yLabel, fontsize=12)
+        axs[0].set_title(title, fontsize=12)
         axs[0].set_ylim(0, max(data)+limit)
         if lines == True: axs[0].plot(range(1, len(data)+1, 1), data, color = 'black', linestyle = '-', alpha = 0.1)
 
-        #axs[1].scatter(range(1,len(data)+1, 1), data, s = 3, marker = '.', color='black')
-        #axs[1].set_xscale('log')
-        #axs[1].set_yscale('log')
-        #axs[1].set_xlabel(xLabel, fontsize=16)
-        #axs[1].set_ylabel(yLabel, fontsize=16)
-        #axs[1].set_title(f'{title} (loglog)', fontsize=16)
-
+        axs[1].scatter(range(1,len(data)+1, 1), data, s = 3, marker = '.', color='black')
+        axs[1].set_xscale('log')
+        axs[1].set_yscale('log')
+        axs[1].set_xlabel(xLabel, fontsize=12)
+        axs[1].set_ylabel(yLabel, fontsize=12)
+        axs[1].set_title(f'{title} (loglog)', fontsize=12)
         
-        plt.xticks(fontsize=16)
-        plt.yticks(fontsize=16)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
         plt.tight_layout()
 
         plt.savefig(f'../graphics/{name_network}/{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
@@ -57,9 +56,9 @@ class Graphics:
         plt.title(title)
         plt.tight_layout()
 
-        plt.savefig(f'../graphics/{name_network}/valores_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
+        plt.savefig(f'../graphics/{name_network}/valores_{title.replace("(", "").replace(")", "").replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
+        
         plt.show()
-
         plt.close()
 
         return analysis_centrality
@@ -98,7 +97,7 @@ class Graphics:
         plt.yticks(fontsize=16)
         plt.tight_layout()
 
-        plt.savefig(f'../graphics/{name_network}/ranking_{title.replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
+        plt.savefig(f'../graphics/{name_network}/{title.replace("(", "").replace(")", "").replace(" ", "_").lower()}.png', dpi = 300,  bbox_inches = 'tight', pad_inches = 0.1)
         
         plt.show()
         plt.close()
