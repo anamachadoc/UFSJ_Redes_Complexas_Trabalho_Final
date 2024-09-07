@@ -10,10 +10,6 @@ class Graphics:
 
         fig, axs = plt.subplots(nrows = 1, ncols = 2, figsize=(12, 4))
         
-        fig.patch.set_facecolor('#E6E6E6')
-        axs[0].set_facecolor('#E6E6E6')
-        axs[1].set_facecolor('#E6E6E6')
-
         axs[0].scatter(range(1,len(data)+1, 1), data, s = 3, marker = '.', color='black')
         axs[0].set_xlabel(xLabel, fontsize=12)
         axs[0].set_ylabel(yLabel, fontsize=12)
@@ -82,9 +78,6 @@ class Graphics:
 
         fig, ax = plt.subplots(figsize=(18, 12))
         
-        fig.patch.set_facecolor('#E6E6E6')
-        ax.set_facecolor('#E6E6E6')
-
         ax.barh(listArtists, listValuesCoefficient, color = 'black')
         ax.set_xlabel('Valor da Centralidade', fontsize=16)
         if label == 'degree': ax.set_ylabel('Vértice (grau)', fontsize=16)
