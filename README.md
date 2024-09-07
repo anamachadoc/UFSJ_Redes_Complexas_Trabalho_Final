@@ -7,7 +7,8 @@ Este trabalho investiga a similaridade entre artistas no Spotify utilizando dado
 ### 📁 _Como executar_
 
 A versão utilizada do python foi 3.10.12
-Todas as dependências necessárias estão no arquivo [requirements.txt](./requirements.txt). Instale-o com
+
+Todas as dependências necessárias estão no arquivo [requirements.txt](./requirements.txt). Instale-o com:
 ```
 pip install -r requirements.txt
 ```
@@ -16,7 +17,7 @@ As análises estão em [code](./code).
 ###  📄 _Dados_
 
 A organização dos dados gerados e utilizados dá-se da seguinte forma:
-1. [data](./data): dados obtidos pela a partir da API
+1. [data](./data): dados obtidos a partir da API
 2. [graphics](./graphics): gráficos gerados a partir das análises das redes criadas
 3. [google_forms](./google_forms): análises das respostas da [pesquisa online](https://forms.gle/B5ntdwDJ2xwzQFpR9) realizada
 4. [credentials](./credentials): **onde devem ser inseridas as credenciais fornecidas pela [API](https://developer.spotify.com/documentation/web-api)**
